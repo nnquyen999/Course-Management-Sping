@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/default">
+
+<head>
+<title>Sửa Khóa Học</title>
+</head>
+
+<body>
+
+	<!-- Main-body start -->
+	<div class="main-body" layout:fragment="content">
+		<div class="page-body">
+			<div class="row">
+				<div class="col-md-12 mb-2">
+					<div class="page-header-breadcrumb">
+						<ul class="breadcrumb-title">
+							<li class="breadcrumb-item">
+								<a th:href="${@environment.getProperty('adress.home')}"> 
+									<i	class="feather icon-home"></i> Trang chủ
+								</a>
+							</li>
+							<li class="breadcrumb-item"><a th:href="${@environment.getProperty('adress.course')}">Danh sách khóa học</a></li>
+							<li class="breadcrumb-item"><a href="#!">Sửa khóa học</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header">
+							<h2 class="text-uppercase text-center">Sửa Khóa Học</h2>
+						</div>
+						<div class="card-block">
+							<form th:action="${@environment.getProperty('adress.course-edit')}" method="post" th:object="${course}" enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-md-6">
+									<input type="hidden" th:field="*{id}">
+									<input type="hidden" th:field="*{leturesCount}">
+									<input type="hidden" th:field="*{hourCount}">
+									
+										<div class="form-group">
+											<label>Tiêu đề</label> 
+											<input type="text"  th:field="*{title}"	class="form-control" />
+											<span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+										</div>
+										<div class="form-group">
+											<label>Mô tả</label> 
+											<input type="text" class="form-control" th:field="*{description}"/>
+											<span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+										</div>
+										<div class="form-group">
+											<label>Danh mục</label> 
+											<select name="categoryId" class="form-control">
+												<option th:each="category :${categories}" th:value="${category.id}" th:text="${category.title}">Frontend</option>
+											</select>
+											<span class="text-danger" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}"></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Giá bán</label> 
+											<input type="text" class="form-control" 
+												 th:value="${#numbers.formatDecimal(course.price, 0,0)}" th:id="price" name="price"/>
+											<span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+										</div>
+										<div class="form-group">
+											<label>Giảm giá (%)</label> 
+											<input type="number" class="form-control" th:field="*{discount}"/>
+											<span class="text-danger" th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}"></span>
+										</div>
+										
+										<div class="form-group">
+											<label>Hình đại diện</label> <br>
+												<input type="hidden" th:field="*{image}" />
+											 <img th:src="${course.image}" id="imgdp" height="150" >
+											<input type="file" name="fileUpload" 
+											accept="image/*" onchange="document.getElementById('imgdp').src = window.URL.createObjectURL(this.files[0])"/>
+											 <span class="text-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>  
+											
+										</div>
+									</div>
+									<div class="col-12">
+										<label>Nội dung</label>
+										<textarea  class="form-control" rows="5" th:field="*{content}"></textarea>
+									</div>
+									<div class="col-12 mt-3">
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary m-b-0">Lưu lại</button>
+											<a th:href="${@environment.getProperty('adress.course')}" class="btn btn-secondary text-white">Quay lại</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

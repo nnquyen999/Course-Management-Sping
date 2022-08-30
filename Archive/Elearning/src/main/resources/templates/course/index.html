@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/default">
+
+<head>
+<title>Trang chủ</title>
+
+</head>
+
+<body>
+
+	<!-- Main-body start -->
+	<div class="main-body" layout:fragment="content">
+		<div class="page-body">
+			<div class="row">
+				<div class="col-md-12 mb-2">
+					<div class="page-header-breadcrumb">
+						<ul class="breadcrumb-title">
+							<li class="breadcrumb-item">
+								<a th:href="${@environment.getProperty('adress.home')}"> 
+									<i	class="feather icon-home"></i> Trang chủ
+								</a>
+							</li>
+							<li class="breadcrumb-item"><a href="#!">Danh sách khóa
+									học</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="card px-3">
+						<div class="card-header px-0 pb-2">
+							<h2 class="text-uppercase text-center">Danh sách khóa học</h2>
+							<a th:href="${@environment.getProperty('adress.course-add')}" class="btn btn-sm btn-primary">Thêm
+								mới</a>
+								<span class="text-danger" th:if="${message}" th:utext="${message}"></span>	
+						</div>
+						<div class="card-block table-border-style">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Tiêu Đề</th>
+											<th>Hình Đại Diện</th>
+											<th>Số Bài Học</th>
+											<th>Số Giờ Học</th>
+											<th>Giá Gốc</th>
+											<th>Giá Giảm</th>
+											<th>Loại Sản Phẩm</th>
+											<th>Hành Động</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="course :${courses}">
+											<th th:text="${course.id}">1</th>
+											<td th:text="${course.title}">Javascript</td>
+											<td><img th:src='${course.image}' height="50" class="p-1 border" /></td>
+											<td th:text="${course.leturesCount}"></td>
+											<th th:text="${course.hourCount}"></th>
+											<td class="text-danger font-weight-bold" th:text="|${#numbers.formatDecimal(course.price, 1, 'POINT', 0, 'COMMA')} VND|"</td> 
+											<th class="text-danger font-weight-bold" th:text="|${#numbers.formatDecimal(course.promotionPrice, 1, 'POINT', 0, 'COMMA')} VND|">Giá Giảm</th>
+											<th th:text="${course.description}"></th>
+											<td><a th:href="@{${@environment.getProperty('adress.course-edit')}(id=${course.id})}"
+												class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
+												<a th:href="@{${@environment.getProperty('adress.course-delete')}(id=${course.id})}"
+												class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

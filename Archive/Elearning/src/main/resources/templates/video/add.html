@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/default">
+
+<head>
+<title>Thêm Thông Tin Video</title>
+
+</head>
+
+<body>
+
+	<!-- Main-body start -->
+	<div class="main-body" layout:fragment="content">
+		<div class="page-body">
+			<div class="row">
+				<div class="col-md-12 mb-2">
+					<div class="page-header-breadcrumb">
+						<ul class="breadcrumb-title">
+							<li class="breadcrumb-item">
+								<a th:href="${@environment.getProperty('adress.home')}"> 
+									<i	class="feather icon-home"></i> Trang chủ
+								</a>
+							</li>
+							<li class="breadcrumb-item"><a th:href="${@environment.getProperty('adress.video')}">Danh sách video</a></li>
+							<li class="breadcrumb-item"><a href="#!">Thêm Thông Tin video</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header">
+							<h2 class="text-uppercase text-center">Thêm mới video</h2>
+						</div>
+						<div class="card-block">
+							<form th:action="${@environment.getProperty('adress.video-add')}" method="post" th:object="${video}"  enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Tiêu đề</label> 
+											<input type="text" th:field="*{title}"	class="form-control" />
+											<span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+										</div>
+										<div class="form-group">
+											<label>Url</label> 
+											<input type="text" th:field="*{url}" class="form-control" />
+											<span class="text-danger" th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></span>
+										</div>
+										<div class="form-group">
+											<label>Hình đại diện</label> 
+											<br>
+											 <img src="" id="imgdp" height="150"  class="mt-2"/>
+											<input type="file" name="fileUpload"  class="form-group"
+											accept="image/*" onchange="document.getElementById('imgdp').src = window.URL.createObjectURL(this.files[0])"/>
+											
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Thời lượng (phút)</label> 
+											<input type="number" th:field="*{timeCount}"  class="form-control" />
+											<span class="text-danger" th:if="${#fields.hasErrors('timeCount')}" th:errors="*{timeCount}"></span>
+										</div>
+										<div class="form-group">
+											<label>Khóa học</label> 
+											<select th:field="*{courseId}" class="form-control">
+												<option  th:each="course :${courses}" th:value="${course.id}" th:text="${course.title}"></option>
+											</select>
+											<span class="text-danger" th:if="${#fields.hasErrors('courseId')}" th:errors="*{courseId}"></span>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group mt-3">
+											<button type="submit" class="btn btn-primary m-b-0">Lưu
+												lại</button>
+											<a th:href="${@environment.getProperty('adress.video')}" class="btn btn-secondary text-white">Quay
+												lại</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

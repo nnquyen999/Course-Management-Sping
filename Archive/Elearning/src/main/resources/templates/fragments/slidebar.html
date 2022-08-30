@@ -1,0 +1,48 @@
+<nav class="pcoded-navbar" xmlns:th="http://www.thymeleaf.org">
+                        <div class="pcoded-inner-navbar main-menu">
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.home')}">
+                                        <span class="pcoded-micon"><i class="fas fa-home"></i></span>
+                                        <span class="pcoded-mtext">Your Info</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.category')}">
+                                        <span class="pcoded-micon"><i class="fas fa-list"></i></span>
+                                        <span class="pcoded-mtext">Danh mục</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.course')}">
+                                        <span class="pcoded-micon"><i class="fas fa-layer-group"></i></span>
+                                        <span class="pcoded-mtext">Khóa học</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.video')}">
+                                        <span class="pcoded-micon"><i class="fas fa-photo-video	"></i></span>
+                                        <span class="pcoded-mtext">Video</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.target')}">
+                                        <span class="pcoded-micon"><i class="fas fa-splotch"></i></span>
+                                        <span class="pcoded-mtext">Mục tiêu</span>
+                                    </a>
+                                </li>	
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.user')}">
+                                        <span class="pcoded-micon"><i class="fas fa-user"></i></span>
+                                        <span class="pcoded-mtext">Tài khoản</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a th:href="${@environment.getProperty('adress.role')}">
+                                        <span class="pcoded-micon"><i class="fas fa-balance-scale"></i></span>
+                                        <span class="pcoded-mtext">Quyền</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>

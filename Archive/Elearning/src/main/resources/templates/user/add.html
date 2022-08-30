@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layout/default">
+
+<head>
+<title>Trang chủ</title>
+
+</head>
+
+<body>
+
+	<!-- Main-body start -->
+	<div class="main-body" layout:fragment="content">
+		<div class="page-body">
+			<div class="row">
+				<div class="col-md-12 mb-2">
+					<div class="page-header-breadcrumb">
+						<ul class="breadcrumb-title">
+							<li class="breadcrumb-item">
+								<a th:href="${@environment.getProperty('adress.home')}"> 
+									<i	class="feather icon-home"></i> Trang chủ
+								</a>
+							</li>
+							<li class="breadcrumb-item"><a th:href="${@environment.getProperty('adress.user')}">Danh sách tài
+									khoản</a></li>
+							<li class="breadcrumb-item"><a href="#!">Thêm mới tài
+									khoản</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="card">
+						<div class="card-header">
+							<h2 class="text-uppercase text-center">Thêm mới tài khoản</h2>
+						</div>
+						<div class="card-block">
+							<form  method="post" th:object="${user}" th:action="${@environment.getProperty('adress.user-add')}"  enctype="multipart/form-data">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Họ tên</label> 
+											<input type="text" th:field="*{fullname}" class="form-control" />
+											<span class="text-danger" th:if="${#fields.hasErrors('fullname')}"  th:errors="*{fullname}"></span>
+										</div>
+										<div class="form-group">
+											<label>Email</label> 
+											<input type="text" th:field="*{email}"	class="form-control" />
+											<span class="text-danger"th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"></span>
+										</div>
+										<div class="form-group">
+											<label>Mật khẩu</label> 
+											<input type="password" th:field="*{password}" class="form-control" />
+											<span class="text-danger"th:if="${#fields.hasErrors('password')}"  th:errors="*{password}"></span>
+										</div>
+										<div class="form-group">
+											<label>Nhập lại mật khẩu</label> <input type="password"
+												name="confirm" class="form-control" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Điện thoại</label> <input type="text" th:field="*{phone}"
+												class="form-control" />
+										</div>
+										<div class="form-group">
+											<label>Avatar</label> <br>
+											 <img src="" id="imgdp" height="150"  class="mt-2"/>
+											<input type="file" name="fileUpload"  class="form-group"
+											accept="image/*" onchange="document.getElementById('imgdp').src = window.URL.createObjectURL(this.files[0])"/>  
+										</div>
+										<div class="form-group">
+											<label>Loại người dùng</label> 
+											<select th:field="*{roleId}" class="form-control" >
+												<option th:each="role :${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+											</select>
+										</div>
+									</div>
+									<div class="col-12 mt-3">
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary m-b-0">Lưu
+												lại</button>
+											<a th:href="${@environment.getProperty('adress.user')}" class="btn btn-secondary text-white">Quay
+												lại</a>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
